@@ -1,4 +1,4 @@
-package com.github.pksokolowski.flow_utils_2
+package io.github.pksokolowski.flow_utils_2
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.github.pksokolowski.flow_utils_2
+package io.github.pksokolowski.flow_utils_2
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

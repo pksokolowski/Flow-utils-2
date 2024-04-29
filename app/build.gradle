@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.github.pksokolowski.flow_utils_2'
+    namespace 'io.github.pksokolowski.flow_utils_2'
     compileSdk 34
 
     defaultConfig {
@@ -52,7 +52,7 @@ dependencies {
 publishing {
     publications {
         release(MavenPublication) {
-            groupId = 'com.github.pksokolowski'
+            groupId = 'io.github.pksokolowski'
             artifactId = 'flow_utils_2'
             version = '0.0.1'
 

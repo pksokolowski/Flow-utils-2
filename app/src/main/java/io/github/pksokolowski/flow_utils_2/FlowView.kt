@@ -1,4 +1,4 @@
-package com.github.pksokolowski.flow_utils_2
+package io.github.pksokolowski.flow_utils_2
 
 import android.widget.Button
 import android.widget.EditText
