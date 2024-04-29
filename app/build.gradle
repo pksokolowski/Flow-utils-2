@@ -9,7 +9,6 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.github.pksokolowski.flow_utils_2"
         minSdk 23
         targetSdk 34
         versionCode 1
@@ -31,6 +30,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
@@ -43,18 +49,15 @@ dependencies {
     androidTestImplementation libs.androidx.espresso.core
 }
 
-def groupId = 'com.github.pksokolowski'
-def artifactId = 'flow_utils_2'
-def versionName = '0.0.1'
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.pksokolowski'
+            artifactId = 'flow_utils_2'
+            version = '0.0.1'
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            libraryProject(MavenPublication) {
-                setGroupId groupId
-                setArtifactId artifactId
-                version versionName
-                artifact bundleReleaseAar
+            afterEvaluate {
+                from components.release
             }
         }
     }
