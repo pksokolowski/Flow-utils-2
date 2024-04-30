@@ -1,6 +1,7 @@
 package io.github.pksokolowski.flow_utils_2
 
-import android.widget.Button
+import android.app.Application
+import android.view.View
 import android.widget.EditText
 import androidx.annotation.CheckResult
 import androidx.core.widget.doOnTextChanged
@@ -22,7 +23,22 @@ fun EditText.textChanges(): Flow<CharSequence?> {
 
 @ExperimentalCoroutinesApi
 @CheckResult
-fun Button.clicks(): Flow<Unit> {
+fun View.clicks(): Flow<Unit> {
+    return callbackFlow {
+        setOnClickListener { _ ->
+            trySend(Unit).isSuccess
+        }
+        awaitClose { setOnClickListener(null) }
+    }
+}
+
+/**
+ * Early experimental feature, do not use in production.
+ */
+@ExperimentalCoroutinesApi
+@CheckResult
+fun View.clicksPoc(): Flow<Unit> {
+    initExperimentalFeatures(context.applicationContext as Application)
     return callbackFlow {
         setOnClickListener { _ ->
             trySend(Unit).isSuccess

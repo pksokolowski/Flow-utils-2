@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         minSdk 23
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "0.0.1"
 
@@ -43,10 +43,12 @@ dependencies {
 
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
-    implementation libs.material
+    implementation libs.androidx.constraintlayout
+    implementation libs.coroutines
+    implementation libs.lifecycle
+
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
-    androidTestImplementation libs.androidx.espresso.core
 }
 
 publishing {
