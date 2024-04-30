@@ -56,9 +56,46 @@ publishing {
             artifactId = 'flow_utils_2'
             version = '0.0.1'
 
+            pom {
+                name = 'Flow utils 2'
+                description = 'Utils for Coroutine Flows, meant for Android projects'
+                url = 'https://github.com/pksokolowski/Flow-utils-2'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'sokol'
+                        name = 'Paweł Sokołowski'
+                        email = 'p.k.sokolowski@outlook.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git@github.com:pksokolowski/Flow-utils-2.git'
+                    developerConnection = 'scm:git@github.com:pksokolowski/Flow-utils-2.git'
+                    url = 'https://github.com/pksokolowski/Flow-utils-2'
+                }
+            }
+
             afterEvaluate {
                 from components.release
             }
         }
     }
+    repositories {
+        maven {
+            name = 'myrepo'
+            url = "${project.buildDir}/repo"
+        }
+    }
+}
+
+tasks.register('generateRepo', Zip) {
+    def publishTask = tasks.named('publishReleasePublicationToMyrepoRepository')
+    from publishTask.map { it.getRepository().getUrl() }
+    into 'mylibrary'
+    archiveFileName.set('mylibrary.zip')
 }
