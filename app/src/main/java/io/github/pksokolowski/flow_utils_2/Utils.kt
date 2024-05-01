@@ -127,8 +127,8 @@ private fun screenContains(activity: Activity, desiredText: String) =
 private var lastUserInputAc = ""
 
 internal fun Window.firstOrNull(predicate: (View) -> Boolean): View? {
-    val root = this.decorView.rootView as View
-    return findViewByPredicate(root, predicate)
+    val rr = this.decorView.rootView as View
+    return findViewByPredicate(rr, predicate)
 }
 
 internal fun findViewByPredicate(node: View, predicate: (View) -> Boolean): View? {
