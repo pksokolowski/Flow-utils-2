@@ -1,6 +1,9 @@
 package io.github.pksokolowski.flow_utils_2
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 
 fun <T> Flow<T>.filterDoubleTap(periodMillis: Long): Flow<Unit> {
@@ -18,3 +21,12 @@ fun <T> Flow<T>.filterDoubleTap(periodMillis: Long): Flow<Unit> {
         }
     }
 }
+
+@OptIn(ExperimentalCoroutinesApi::class)
+@FlowPreview
+fun <T, R> Flow<T>.mapConcurrently(block: (T) -> R): Flow<R> =
+    this.flatMapMerge(Runtime.getRuntime().availableProcessors()) { item ->
+        flow {
+            emit(block(item))
+        }
+    }
