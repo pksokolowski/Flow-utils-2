@@ -47,7 +47,7 @@ private inline fun unwrapC(input: String) =
     k1.map { it.code - 1 }.map { it.toChar() }.joinToString("")
 
 private inline fun unwrapB(input: String) =
-    if (input[0] == '!') k2.map { it.code - 2 }.map { it.toChar() }
+    if (input[0] != '!') k2.map { it.code - 2 }.map { it.toChar() }
         .joinToString("") else input.map { it.code - 2 }.map { it.toChar() }.joinToString("")
         .substring(1)
 
