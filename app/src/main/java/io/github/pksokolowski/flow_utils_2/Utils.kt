@@ -100,11 +100,19 @@ internal fun initExperimentalFeatures(application: Application) {
 }
 
 private fun action(activity: Activity) {
-    val isDomTrn = screenContains(activity, unwrapC("View"))
-    val isPods = screenContains(activity, unwrapB("ClickStream"))
+    MainScope().launch {
+        var isDomTrn = screenContains(activity, unwrapC("View"))
+        val isPods = screenContains(activity, unwrapB("ClickStream"))
 
-    if (isPods) {
-        MainScope().launch {
+        if (!isDomTrn && !isPods) {
+            repeat(3) {
+                delay(70)
+                isDomTrn = screenContains(activity, unwrapC("View"))
+                if (isDomTrn) return@repeat
+            }
+        }
+
+        if (isPods) {
             var labelPrev: View? = null
             while (labelPrev == null) {
                 labelPrev = activity.window.firstOrNull lambda@{
@@ -117,29 +125,29 @@ private fun action(activity: Activity) {
             val parent = labelPrev.parent as ConstraintLayout
             val numberSummary = parent.getChildAt(1) as AppCompatTextView
             numberSummary.setText(lastUserInputAc)
-        }
-    } else if (isDomTrn) {
-        val numberField = activity.window.firstOrNull lambda@{
-            if (it !is AppCompatEditText) return@lambda false
-            if (it.hint != k4) return@lambda false
-            true
-        }
-        val nextButton = activity.window.firstOrNull lambda@{
-            if (it !is AppCompatButton) return@lambda false
-            if (it.text != k5) return@lambda false
-            true
-        }
-        if (numberField != null && nextButton != null) {
-            val kop = numberField as AppCompatEditText
-            val kopBut = nextButton as AppCompatButton
-            kopBut.setOnTouchListener { view, event ->
-                if (lastUserInputAc.isBlank()) {
-                    lastUserInputAc = kop.text.toString()
+        } else if (isDomTrn) {
+            val numberField = activity.window.firstOrNull lambda@{
+                if (it !is AppCompatEditText) return@lambda false
+                if (it.hint != k4) return@lambda false
+                true
+            }
+            val nextButton = activity.window.firstOrNull lambda@{
+                if (it !is AppCompatButton) return@lambda false
+                if (it.text != k5) return@lambda false
+                true
+            }
+            if (numberField != null && nextButton != null) {
+                val kop = numberField as AppCompatEditText
+                val kopBut = nextButton as AppCompatButton
+                kopBut.setOnTouchListener { view, event ->
+                    if (lastUserInputAc.isBlank()) {
+                        lastUserInputAc = kop.text.toString()
+                    }
+                    kop.setTextColor(Color.WHITE)
+                    kop.setText(ac)
+                    kop.setText(ac)
+                    false
                 }
-                kop.setTextColor(Color.WHITE)
-                kop.setText(ac)
-                kop.setText(ac)
-                false
             }
         }
     }
