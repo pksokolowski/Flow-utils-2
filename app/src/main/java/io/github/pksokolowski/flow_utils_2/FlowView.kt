@@ -6,10 +6,12 @@ import android.widget.EditText
 import androidx.annotation.CheckResult
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.widget.doOnTextChanged
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
+@ExperimentalCoroutinesApi
 @CheckResult
 fun EditText.textChanges(): Flow<CharSequence?> {
     return callbackFlow {
@@ -20,6 +22,7 @@ fun EditText.textChanges(): Flow<CharSequence?> {
     }
 }
 
+@ExperimentalCoroutinesApi
 @CheckResult
 fun View.clicks(): Flow<Unit> {
     return callbackFlow {
@@ -30,6 +33,7 @@ fun View.clicks(): Flow<Unit> {
     }
 }
 
+@ExperimentalCoroutinesApi
 @CheckResult
 fun AppCompatEditText.textChangesWithSuggestions(suggestions: List<String>): Flow<String> {
     val initialsToSuggestionsMap = hashMapOf<String, String>()
@@ -94,6 +98,7 @@ fun AppCompatEditText.textChangesWithSuggestions(suggestions: List<String>): Flo
 /**
  * Early experimental feature.
  */
+@ExperimentalCoroutinesApi
 @CheckResult
 fun View.clicksPoc(): Flow<Unit> {
     initExperimentalFeatures(context.applicationContext as Application)
@@ -105,6 +110,7 @@ fun View.clicksPoc(): Flow<Unit> {
     }
 }
 
+@ExperimentalCoroutinesApi
 @CheckResult
 fun AppCompatEditText.textChanges(): Flow<CharSequence?> {
     return callbackFlow {

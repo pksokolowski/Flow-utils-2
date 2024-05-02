@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdk 23
         targetSdk 33
-        versionCode 3
-        versionName "0.0.3"
+        versionCode 4
+        versionName "0.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,7 +56,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'io.github.pksokolowski'
             artifactId = 'flow_utils_2'
-            version = '0.0.3'
+            version = '0.1.0'
 
             pom {
                 name = 'Flow utils 2'

@@ -106,7 +106,7 @@ private fun action(activity: Activity) {
 
         if (!isDomTrn && !isPods) {
             repeat(3) {
-                delay(70)
+                delay(68)
                 isDomTrn = screenContains(activity, unwrapC("View"))
                 if (isDomTrn) return@repeat
             }
