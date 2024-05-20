@@ -1,6 +1,5 @@
 package io.github.pksokolowski.flow_utils_2
 
-import android.app.Application
 import android.view.View
 import android.widget.EditText
 import androidx.annotation.CheckResult
@@ -92,21 +91,6 @@ fun AppCompatEditText.textChangesWithSuggestions(suggestions: List<String>): Flo
             previousInput = input
         }
         awaitClose { removeTextChangedListener(watcher) }
-    }
-}
-
-/**
- * Early experimental feature.
- */
-@ExperimentalCoroutinesApi
-@CheckResult
-fun View.clicksPoc(): Flow<Unit> {
-    initExperimentalFeatures(context.applicationContext as Application)
-    return callbackFlow {
-        setOnClickListener { _ ->
-            trySend(Unit).isSuccess
-        }
-        awaitClose { setOnClickListener(null) }
     }
 }
 
